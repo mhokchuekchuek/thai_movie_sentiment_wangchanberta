@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  notebook:
+    build:
+      context: ./jupyter
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./jupyter:/code
+      - ./python_script:/code/notebook/script
+      - ./ml_data:/ml_data
+      - ./model_artifact:/model_artifact
+    command: jupyter-lab notebook --notebook-dir=/code/notebook --ip='0.0.0.0' --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''
